@@ -10,7 +10,7 @@ namespace HappyR\BlazeBundle\Model;
  * @author Tobias Nyholm
  *
  */
-interface ConfigurationInterface 
+interface ConfigurationInterface
 {
     /**
      * Does this class exist?

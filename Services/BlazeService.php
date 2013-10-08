@@ -72,7 +72,7 @@ class BlazeService implements BlazeServiceInterface
     /**
      * Alias for getPath with $absolute=true
      *
-     * @param object $entity
+     * @param object &$entity
      * @param string $action
      *
      * @return string url
@@ -85,7 +85,7 @@ class BlazeService implements BlazeServiceInterface
     /**
      * Get the path
      *
-     * @param object $entity
+     * @param object &$entity
      * @param string $action
      * @param bool $absolute if true we return the url
      *
@@ -105,6 +105,7 @@ class BlazeService implements BlazeServiceInterface
      * @param object &$entity
      * @param array &$params
      *
+     * @return array
      */
     protected function getRouteParams(&$entity, array &$params)
     {

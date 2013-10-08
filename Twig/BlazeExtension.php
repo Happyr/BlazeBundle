@@ -61,6 +61,7 @@ class BlazeExtension extends \Twig_Extension
      * @param string $action
      * @param boolean $absolute
      *
+     * @return string
      */
     public function blaze($entities, $action, $absolute=false)
     {

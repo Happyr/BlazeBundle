@@ -33,6 +33,7 @@ class Configuration implements ConfigurationInterface
                                     return true;
                                 }
                             }
+
                             return false;
                         })
                         ->thenInvalid('The happy_r_blaze.entities config %s must be an array.')
@@ -46,6 +47,7 @@ class Configuration implements ConfigurationInterface
                                     return true;
                                 }
                             }
+
                             return false;
                         })
                         ->thenInvalid('%s must contain "route" and "parameters".')

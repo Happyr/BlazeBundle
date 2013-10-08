@@ -10,7 +10,7 @@ namespace HappyR\BlazeBundle\Services;
  * @author Tobias Nyholm
  *
  */
-interface BlazeServiceInterface 
+interface BlazeServiceInterface
 {
     /**
      * Get the url
