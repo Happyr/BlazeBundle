@@ -1,0 +1,28 @@
+{
+    "name": "happyr/blaze-bundle",
+    "type": "symfony-bundle",
+    "description": "HappyR BlazeBundle ",
+    "keywords": ["No tags"],
+    "homepage": "http://developer.happyr.se/symfony2-bundles/happyr-blaze-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tobias Nyholm",
+            "email": "tobias@happyrecruiting.se"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/symfony": ">=2.0",
+        "twig/twig": "*",
+
+    },
+    "require-dev": {
+        "mockery/mockery": "*"
+    },
+    "autoload": {
+        "psr-0": { "HappyR\\BlazeBundle": "" }
+    },
+    "target-dir": "HappyR/BlazeBundle"
+
+}

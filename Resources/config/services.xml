@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="happy_r_blaze.config.class">HappyR\BlazeBundle\Model\Configuration</parameter>
+        <parameter key="happy_r_blaze.blaze_service.class">HappyR\BlazeBundle\Services\BlazeService</parameter>
+        <parameter key="happy_r_blaze.twig_extension.class">HappyR\BlazeBundle\Twig\BlazeExtension</parameter>
+    </parameters>
+
+    <services>
+        <service id="happy_r_blaze.config" class="%happy_r_blaze.config.class%">
+            <argument>%happy_r_blaze.entities%</argument>
+        </service>
+
+        <service id="happy_r_blaze.blaze_service" class="%happy_r_blaze.blaze_service.class%">
+            <argument type="service" id="happy_r_blaze.config" />
+            <argument type="service" id="router" />
+        </service>
+
+        <service id="happy_r_blaze.twig_extension" class="%happy_r_blaze.twig_extension.class%">
+            <argument type="service" id="happy_r_blaze.blaze_service" />
+            <tag name="twig.extension" />
+        </service>
+    </services>
+
+    <!--
+      <services>
+        <service id="happy_r_blaze.config" class="%happy_r_blaze.example.class%">
+            <argument type="service" id="service_id" />
+            <argument>plain_value</argument>
+            <argument>%happy_r_blaze.entities%</argument>
+        </service>
+    </services>
+
+     -->
+</container>
