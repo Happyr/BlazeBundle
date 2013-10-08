@@ -14,8 +14,7 @@
     "require": {
         "php": ">=5.3.2",
         "symfony/symfony": ">=2.0",
-        "twig/twig": "*",
-
+        "twig/twig": "*"
     },
     "require-dev": {
         "mockery/mockery": "*"
