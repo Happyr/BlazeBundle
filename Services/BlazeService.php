@@ -148,16 +148,16 @@ class BlazeService implements BlazeServiceInterface
     protected function getClass(&$entity)
     {
         $class=get_class($entity);
-        if($this->config->classExist($class)){
-            return $class;
+
+        //Do max 3 times
+        for($i=0; $i<3 && $class ; $i++){
+            if($this->config->classExist($class)){
+                return $class;
+            }
+            $class=get_parent_class($class);
         }
 
-        $class=get_parent_class($entity);
-        if($this->config->classExist($class)){
-            return $class;
-        }
-
-        throw new \Exception(sprintf('Class %s does not exist in Blaze config.', $class));
+        throw new \Exception(sprintf('Class %s does not exist in Blaze config.', get_class($entity)));
     }
 
 }
