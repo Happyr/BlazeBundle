@@ -53,10 +53,7 @@ class BlazeService implements BlazeServiceInterface
             throw new \Exception(sprintf('Blaze: Cant find route for null object.'));
         }
 
-        $class=get_class($entity);
-        if(!$this->config->classExist($class)){
-            throw new \Exception(sprintf('Class %s does not exist in Blaze config.', $class));
-        }
+        $class=$this->getClass($entity);
 
         if(!$this->config->actionExist($class, $action)){
             throw new \Exception(sprintf('Action %s for class %s does not exist in Blaze config.', $action, $class));
@@ -138,6 +135,29 @@ class BlazeService implements BlazeServiceInterface
     private function callEntityFunction(&$entity, $function)
     {
         return $entity->$function();
+    }
+
+    /**
+     * Get the class in the config.
+     * If the class of $entity is not found, try the parent of $entity
+     *
+     * @param object &$entity
+     *
+     * @return string
+     */
+    protected function getClass(&$entity)
+    {
+        $class=get_class($entity);
+        if($this->config->classExist($class)){
+            return $class;
+        }
+
+        $class=get_parent_class($entity);
+        if($this->config->classExist($class)){
+            return $class;
+        }
+
+        throw new \Exception(sprintf('Class %s does not exist in Blaze config.', $class));
     }
 
 }
