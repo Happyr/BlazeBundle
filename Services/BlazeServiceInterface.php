@@ -15,20 +15,20 @@ interface BlazeServiceInterface
     /**
      * Get the url
      *
-     * @param object &$entity
+     * @param object &$object
      * @param string $action
      *
      * @return string
      */
-    public function getUrl(&$entity, $action);
+    public function getUrl(&$object, $action);
 
     /**
      * Get the path
      *
-     * @param object &$entity
+     * @param object &$object
      * @param string $action
      *
      * @return string
      */
-    public function getPath(&$entity, $action);
+    public function getPath(&$object, $action);
 }

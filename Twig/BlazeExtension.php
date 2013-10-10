@@ -57,24 +57,24 @@ class BlazeExtension extends \Twig_Extension
     /**
      * Call the blaze service
      *
-     * @param mixed $entities
+     * @param mixed $objects
      * @param string $action
      * @param boolean $absolute
      *
      * @return string
      */
-    public function blaze($entities, $action, $absolute=false)
+    public function blaze($objects, $action, $absolute=false)
     {
-        //This is a fix until we support multiple entities..
-        if(is_array($entities)){
-            $entities=array_shift($entities);
+        //This is a fix until we support multiple objects..
+        if(is_array($objects)){
+            $objects=array_shift($objects);
         }
 
         if($absolute){
-            return $this->blaze->getUrl($entities, $action);
+            return $this->blaze->getUrl($objects, $action);
         }
         else{
-            return $this->blaze->getPath($entities, $action);
+            return $this->blaze->getPath($objects, $action);
         }
     }
 

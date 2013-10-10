@@ -23,7 +23,7 @@ class HappyRBlazeExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
 
-        $container->setParameter('happy_r_blaze.entities', $config['entities']);
+        $container->setParameter('happy_r_blaze.objects', $config['objects']);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');

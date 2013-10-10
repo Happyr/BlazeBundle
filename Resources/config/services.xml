@@ -12,7 +12,7 @@
 
     <services>
         <service id="happy_r_blaze.config" class="%happy_r_blaze.config.class%">
-            <argument>%happy_r_blaze.entities%</argument>
+            <argument>%happy_r_blaze.objects%</argument>
         </service>
 
         <service id="happy_r_blaze.blaze_service" class="%happy_r_blaze.blaze_service.class%">
@@ -26,14 +26,4 @@
         </service>
     </services>
 
-    <!--
-      <services>
-        <service id="happy_r_blaze.config" class="%happy_r_blaze.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%happy_r_blaze.entities%</argument>
-        </service>
-    </services>
-
-     -->
 </container>

@@ -2,6 +2,7 @@
 
 
 namespace HappyR\BlazeBundle\Services;
+use HappyR\BlazeBundle\Exception\BlazeException;
 use HappyR\BlazeBundle\Model\ConfigurationInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -41,22 +42,22 @@ class BlazeService implements BlazeServiceInterface
     /**
      * Get the route and the params.
      *
-     * @param object &$entity
+     * @param object &$object
      * @param string $action
      *
      * @return array array($route, $params)
      * @throws \Exception
      */
-    protected function getRoute(&$entity, $action)
+    protected function getRoute(&$object, $action)
     {
-        if($entity==null){
-            throw new \Exception(sprintf('Blaze: Cant find route for non-object.'));
+        if($object==null){
+            throw new BlazeException(sprintf('Blaze: Cant find route for non-object.'));
         }
 
-        $class=$this->getClass($entity);
+        $class=$this->getClass($object);
 
         if(!$this->config->actionExist($class, $action)){
-            throw new \Exception(sprintf('Action "%s" for class %s does not exist in Blaze config.', $action, $class));
+            throw new BlazeException(sprintf('Action "%s" for class %s does not exist in Blaze config.', $action, $class));
         }
 
         $route=$this->config->getRoute($class, $action);
@@ -69,29 +70,29 @@ class BlazeService implements BlazeServiceInterface
     /**
      * Alias for getPath with $absolute=true
      *
-     * @param object &$entity
+     * @param object &$object
      * @param string $action
      *
      * @return string url
      */
-    public function getUrl(&$entity, $action)
+    public function getUrl(&$object, $action)
     {
-        return $this->getPath($entity, $action, true);
+        return $this->getPath($object, $action, true);
     }
 
     /**
      * Get the path
      *
-     * @param object &$entity
+     * @param object &$object
      * @param string $action
      * @param bool $absolute if true we return the url
      *
      * @return string url
      */
-    public function getPath(&$entity, $action, $absolute=false)
+    public function getPath(&$object, $action, $absolute=false)
     {
-        list($route, $params)=$this->getRoute($entity, $action);
-        $routeParams=$this->getRouteParams($entity, $params);
+        list($route, $params)=$this->getRoute($object, $action);
+        $routeParams=$this->getRouteParams($object, $params);
 
         return $this->router->generate($route, $routeParams, $absolute);
     }
@@ -99,33 +100,33 @@ class BlazeService implements BlazeServiceInterface
     /**
      *
      *
-     * @param object &$entity
+     * @param object &$object
      * @param array &$params
      *
      * @return array
      */
-    protected function getRouteParams(&$entity, array &$params)
+    protected function getRouteParams(&$object, array &$params)
     {
         /*
-         * Assert: I know for sure that $entity is not null
+         * Assert: I know for sure that $object is not null
          */
         $routeParams=array();
         foreach($params as $key=>$func){
             if(strstr($func, '.')){
                 $funcs=explode('.', $func);
-                $routeParams[$key]=$entity;
+                $routeParams[$key]=$object;
                 foreach($funcs as $f){
-                    $routeParams[$key]=$this->callEntityFunction($routeParams[$key], $f);
+                    $routeParams[$key]=$this->callObjectFunction($routeParams[$key], $f);
 
                     if($routeParams[$key]===null){
-                        throw new \Exception(sprintf(
+                        throw new BlazeException(sprintf(
                             'Function "%s" ended up with returning non-object (null) after "%s".',$func, $f
                         ));
                     }
                 }
             }
             else{
-                $routeParams[$key]=$this->callEntityFunction($entity, $func);
+                $routeParams[$key]=$this->callObjectFunction($object, $func);
             }
 
         }
@@ -134,21 +135,25 @@ class BlazeService implements BlazeServiceInterface
     }
 
     /**
-     * Call a $function on the entity
+     * Call a $function on the object
      *
-     * @param object &$entity
+     * @param object &$object
      * @param string $function
      *
      * @return mixed
      */
-    private function callEntityFunction(&$entity, $function)
+    private function callObjectFunction(&$object, $function)
     {
         try{
-            return $entity->$function();
+            return $object->$function();
         }
         catch(\ErrorException $e){
-            if(!method_exists($entity, $function)){
-                throw new \Exception(sprintf('Method %s does not exits on object %s', $function, get_class($entity)));
+            if($object===null){
+                throw new BlazeException(sprintf('Called "%s" on a non-object', $function));
+            }
+
+            if(!method_exists($object, $function)){
+                throw new BlazeException(sprintf('Method %s does not exits on object %s', $function, get_class($object)));
             }
         }
 
@@ -156,27 +161,27 @@ class BlazeService implements BlazeServiceInterface
 
     /**
      * Get the class in the config.
-     * If the class of $entity is not found, try the parent of $entity
+     * If the class of $object is not found, try the parent of $object
      *
-     * @param object &$entity
+     * @param object &$object
      *
      * @return string
      */
-    protected function getClass(&$entity)
+    protected function getClass(&$object)
     {
-        if(!is_object($entity)){
-            //we assume that $entity is a string and namespace
-            if(class_exists($entity)){
-                return $entity;
+        if(!is_object($object)){
+            //we assume that $object is a string and namespace
+            if(class_exists($object)){
+                return $object;
             }
 
             //class not loaded
-            throw new \Exception(sprintf(
-                'Blaze must receive an object or a fully qualified name of a loaded class. We got "%s"', $entity
+            throw new BlazeException(sprintf(
+                'Blaze must receive an object or a fully qualified name of a loaded class. We got "%s"', $object
             ));
         }
-       
-        $class=get_class($entity);
+
+        $class=get_class($object);
 
         //Do max 3 times
         for($i=0; $i<3 && $class ; $i++){
@@ -186,7 +191,7 @@ class BlazeService implements BlazeServiceInterface
             $class=get_parent_class($class);
         }
 
-        throw new \Exception(sprintf('Class %s does not exist in Blaze config.', get_class($entity)));
+        throw new BlazeException(sprintf('Class %s does not exist in Blaze config.', get_class($object)));
     }
 
 }

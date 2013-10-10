@@ -48,7 +48,7 @@ $bundles = array(
 # app/config/config.yml
 
 happy_r_blaze:
-  entities:
+  objects:
     Acme\DemoBundle\Entity\Foo:
       edit:
         route: 'foo_edit'
