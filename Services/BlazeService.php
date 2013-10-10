@@ -106,6 +106,9 @@ class BlazeService implements BlazeServiceInterface
      */
     protected function getRouteParams(&$entity, array &$params)
     {
+        /*
+         * Assert: I know for sure that $entity is not null
+         */
         $routeParams=array();
         foreach($params as $key=>$func){
             if(strstr($func, '.')){
@@ -113,6 +116,12 @@ class BlazeService implements BlazeServiceInterface
                 $routeParams[$key]=$entity;
                 foreach($funcs as $f){
                     $routeParams[$key]=$this->callEntityFunction($routeParams[$key], $f);
+
+                    if($routeParams[$key]===null){
+                        throw new \Exception(sprintf(
+                            'Function "%s" ended up with returning non-object (null) after "%s".',$func, $f
+                        ));
+                    }
                 }
             }
             else{
@@ -134,7 +143,15 @@ class BlazeService implements BlazeServiceInterface
      */
     private function callEntityFunction(&$entity, $function)
     {
-        return $entity->$function();
+        try{
+            return $entity->$function();
+        }
+        catch(\ErrorException $e){
+            if(!method_exists($entity, $function)){
+                throw new \Exception(sprintf('Method %s does not exits on object %s', $function, get_class($entity)));
+            }
+        }
+
     }
 
     /**
