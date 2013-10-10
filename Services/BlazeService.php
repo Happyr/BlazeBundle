@@ -50,13 +50,13 @@ class BlazeService implements BlazeServiceInterface
     protected function getRoute(&$entity, $action)
     {
         if($entity==null){
-            throw new \Exception(sprintf('Blaze: Cant find route for null object.'));
+            throw new \Exception(sprintf('Blaze: Cant find route for non-object.'));
         }
 
         $class=$this->getClass($entity);
 
         if(!$this->config->actionExist($class, $action)){
-            throw new \Exception(sprintf('Action %s for class %s does not exist in Blaze config.', $action, $class));
+            throw new \Exception(sprintf('Action "%s" for class %s does not exist in Blaze config.', $action, $class));
         }
 
         $route=$this->config->getRoute($class, $action);
