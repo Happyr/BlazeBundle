@@ -164,6 +164,18 @@ class BlazeService implements BlazeServiceInterface
      */
     protected function getClass(&$entity)
     {
+        if(!is_object($entity)){
+            //we assume that $entity is a string and namespace
+            if(class_exists($entity)){
+                return $entity;
+            }
+
+            //class not loaded
+            throw new \Exception(sprintf(
+                'Blaze must receive an object or a fully qualified name of a loaded class. We got "%s"', $entity
+            ));
+        }
+       
         $class=get_class($entity);
 
         //Do max 3 times
