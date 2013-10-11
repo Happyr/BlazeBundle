@@ -64,8 +64,8 @@ interface ConfigurationInterface
     /**
      * Get the complementary objects
      *
-     * @param $class
-     * @param $action
+     * @param string $class
+     * @param string $action
      *
      * @return array
      */

@@ -58,7 +58,9 @@ class BlazeService implements BlazeServiceInterface
         $class=$this->getClass($object);
 
         if(!$this->config->actionExist($class, $action)){
-            throw new BlazeException(sprintf('Action "%s" for class %s does not exist in Blaze config.', $action, $class));
+            throw new BlazeException(
+                sprintf('Action "%s" for class %s does not exist in Blaze config.', $action, $class)
+            );
         }
 
         $route=$this->config->getRoute($class, $action);
@@ -175,8 +177,8 @@ class BlazeService implements BlazeServiceInterface
     /**
      * Get a route param
      *
-     * @param $object
-     * @param $function
+     * @param object &$object
+     * @param string &$function
      *
      * @return mixed
      * @throws \HappyR\BlazeBundle\Exception\BlazeException
@@ -196,6 +198,7 @@ class BlazeService implements BlazeServiceInterface
                     ));
                 }
             }
+
             return $returnValue;
         }
         else{
@@ -222,7 +225,9 @@ class BlazeService implements BlazeServiceInterface
             }
 
             if(!method_exists($object, $function)){
-                throw new BlazeException(sprintf('Method %s does not exits on object %s', $function, get_class($object)));
+                throw new BlazeException(
+                    sprintf('Method %s does not exits on object %s', $function, get_class($object))
+                );
             }
         }
 
