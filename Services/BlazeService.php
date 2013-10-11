@@ -4,6 +4,7 @@
 namespace HappyR\BlazeBundle\Services;
 use HappyR\BlazeBundle\Exception\BlazeException;
 use HappyR\BlazeBundle\Model\ConfigurationInterface;
+use Symfony\Component\Debug\Exception\FatalErrorException;
 use Symfony\Component\Routing\RouterInterface;
 
 
@@ -141,6 +142,15 @@ class BlazeService implements BlazeServiceInterface
                  * other elements should use objects in the $cmpObj
                  */
                 if($key==0){
+                    //make sure that the size of $params is equal to $cmpObj
+                    if(count($params) != count($cmpObj)){
+                        throw new BlazeException(sprintf(
+                            'There is a mismatch in the number of route params and the number of objects. This '.
+                            'is usually cased by a configuration error or that you forgotten to send the complementary'.
+                            ' objects to the Blaze service. We found %s parameter arrays but %d objects',
+                            count($params), count($cmpObj)+1));
+                    }
+
                     $routeParams=array_merge($routeParams, $this->getRouteParams($object, $func));
                     continue;
                 }
@@ -206,7 +216,7 @@ class BlazeService implements BlazeServiceInterface
         try{
             return $object->$function();
         }
-        catch(\ErrorException $e){
+        catch(\Exception $e){
             if($object===null){
                 throw new BlazeException(sprintf('Called "%s" on a non-object', $function));
             }
