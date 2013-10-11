@@ -79,6 +79,8 @@ happy_r_blaze:
 
 Usage
 -----
+
+### Twig
 ``` html
 
 // Any.html.twig
@@ -94,10 +96,17 @@ Usage
 
 ```
 
+### PHP
+
 ``` php
 //AnyController.php
 
-$showUrl = $this->get('happy_r_blaze.blaze_service')->getPath($foo, 'show');
-$manageUrl = $this->get('happy_r_blaze.blaze_service')->getPath($foobar, 'show', array($baz,$bazbar));
+// ...
+  public function SomeAction(){
+    $showUrl = $this->get('happy_r_blaze.blaze_service')->getPath($foo, 'show');
+    $manageUrl = $this->get('happy_r_blaze.blaze_service')->getPath($foobar, 'show', array($baz,$bazbar));
+
+    // ...
+  }
 
 ```
