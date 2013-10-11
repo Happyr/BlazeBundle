@@ -78,6 +78,23 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
+     * Get the complementary objects if they exists for the route
+     *
+     * @param string $class
+     * @param string $action
+     *
+     * @return array of objects
+     */
+    public function getComplementaryObjects($class, $action)
+    {
+        if(!isset($this->config[$class][$action]['complementaryObjects'])){
+            return array();
+        }
+
+        return $this->config[$class][$action]['complementaryObjects'];
+    }
+
+    /**
      * Does this action exists for that class?
      *
      * @param string $class

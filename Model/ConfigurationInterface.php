@@ -60,4 +60,14 @@ interface ConfigurationInterface
      * @return array where key=>value is routeParam=>function
      */
     public function getParameters($class, $action);
+
+    /**
+     * Get the complementary objects
+     *
+     * @param $class
+     * @param $action
+     *
+     * @return array
+     */
+    public function getComplementaryObjects($class, $action);
 }

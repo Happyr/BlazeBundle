@@ -66,6 +66,13 @@ happy_r_blaze:
       anything:
         route: 'baz_show'
         parameters: {id:'getId', foo_id:'getFoo.getId'}
+
+    #if you need support for routes where the objects have no relation:
+    Acme\DemoBundle\Entity\FooBar:
+      manage:
+        route: 'foobar_manage'
+        parameters: [{id: 'getId'}, {baz_id: 'getId', baz_name: 'getName'}, {bazbar_id: 'getSlug'}]
+        complementaryObjects: ["Acme\DemoBundle\Entity\Baz", "Acme\DemoBundle\Entity\BazBar"]
 ```
 
 
@@ -82,5 +89,15 @@ Usage
 {# bax is a Baz object #}
 <a href="{{ foo|blaze('anything') }}">Show Baz</a>
 
+{# and the multiple objects .. #}
+<a href="{{ [foobar,baz,bazbar]|blaze('manage') }}">Show Baz</a>
+
+```
+
+``` php
+//AnyController.php
+
+$showUrl = $this->get('happy_r_blaze.blaze_service')->getPath($foo, 'show');
+$manageUrl = $this->get('happy_r_blaze.blaze_service')->getPath($foobar, 'show', array($baz,$bazbar));
 
 ```
