@@ -2,8 +2,8 @@
 
 
 namespace HappyR\BlazeBundle\Twig;
-use HappyR\BlazeBundle\Services\BlazeServiceInterface;
 
+use HappyR\BlazeBundle\Services\BlazeServiceInterface;
 
 /**
  * Class BlazeExtension
@@ -28,7 +28,6 @@ class BlazeExtension extends \Twig_Extension
     {
         $this->blaze = $blaze;
     }
-
 
     /**
      * @inherit
@@ -63,23 +62,21 @@ class BlazeExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function blaze($object, $action, $absolute=false)
+    public function blaze($object, $action, $absolute = false)
     {
-        $compObjects=array();
+        $compObjects = array();
 
-        if(is_array($object)){
-            $compObjects=$object;
-            $object=array_shift($compObjects);
+        if (is_array($object)) {
+            $compObjects = $object;
+            $object = array_shift($compObjects);
         }
 
-        if($absolute){
+        if ($absolute) {
             return $this->blaze->getUrl($object, $action, $compObjects);
-        }
-        else{
+        } else {
             return $this->blaze->getPath($object, $action, $compObjects);
         }
     }
-
 
     /**
      * @inherit

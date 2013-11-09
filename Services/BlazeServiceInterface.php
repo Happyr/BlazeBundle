@@ -3,7 +3,6 @@
 
 namespace HappyR\BlazeBundle\Services;
 
-
 /**
  * Class BlazeServiceInterface
  *

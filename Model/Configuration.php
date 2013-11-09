@@ -3,7 +3,6 @@
 
 namespace HappyR\BlazeBundle\Model;
 
-
 /**
  * Class Configuration
  *
@@ -26,7 +25,6 @@ class Configuration implements ConfigurationInterface
     {
         $this->config = $config;
     }
-
 
     /**
      * Get all classes in the config file
@@ -87,7 +85,7 @@ class Configuration implements ConfigurationInterface
      */
     public function getComplementaryObjects($class, $action)
     {
-        if(!isset($this->config[$class][$action]['complementaryObjects'])){
+        if (!isset($this->config[$class][$action]['complementaryObjects'])) {
             return array();
         }
 
@@ -118,6 +116,4 @@ class Configuration implements ConfigurationInterface
     {
         return array_key_exists($class, $this->config);
     }
-
-
 }

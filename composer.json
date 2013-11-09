@@ -20,7 +20,9 @@
         "mockery/mockery": "*"
     },
     "autoload": {
-        "psr-0": { "HappyR\\BlazeBundle": "" }
+        "psr-0": {
+            "HappyR\\BlazeBundle": ""
+        }
     },
     "target-dir": "HappyR/BlazeBundle"
 

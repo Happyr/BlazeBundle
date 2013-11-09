@@ -3,7 +3,6 @@
 
 namespace HappyR\BlazeBundle\Model;
 
-
 /**
  * Class ConfigurationInterface
  *
@@ -39,7 +38,6 @@ interface ConfigurationInterface
      * @return array
      */
     public function getActions($class);
-
 
     /**
      * Get the route for a class and action

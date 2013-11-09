@@ -3,7 +3,6 @@
 
 namespace HappyR\BlazeBundle\Exception;
 
-
 /**
  * Class BlazeException
  *
