@@ -24,7 +24,7 @@ class BlazeExtension extends \Twig_Extension
     /**
      * @param BlazeServiceInterface $blaze
      */
-    function __construct(BlazeServiceInterface $blaze)
+    public function __construct(BlazeServiceInterface $blaze)
     {
         $this->blaze = $blaze;
     }

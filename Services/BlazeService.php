@@ -34,7 +34,7 @@ class BlazeService implements BlazeServiceInterface
      * @param ConfigurationInterface $config
      * @param RouterInterface $router
      */
-    function __construct(ConfigurationInterface $config, RouterInterface $router)
+    public function __construct(ConfigurationInterface $config, RouterInterface $router)
     {
         $this->config = $config;
         $this->router = $router;
@@ -149,8 +149,8 @@ class BlazeService implements BlazeServiceInterface
                     //make sure that the size of $params is equal to $cmpObj + the $obejct
                     if (count($params) != count($cmpObj) + 1) {
                         throw new BlazeException(sprintf(
-                            'There is a mismatch in the number of route params and the number of objects. This ' .
-                            'is usually cased by a configuration error or that you forgotten to send the complementary' .
+                            'There is a mismatch in the number of route params and the number of objects. This is ' .
+                            'usually cased by a configuration error or that you forgotten to send the complementary' .
                             ' objects to the Blaze service. We found %s parameter arrays but %d objects',
                             count($params),
                             count($cmpObj) + 1

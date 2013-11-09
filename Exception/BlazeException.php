@@ -11,5 +11,4 @@ namespace HappyR\BlazeBundle\Exception;
  */
 class BlazeException extends \Exception
 {
-
 }
