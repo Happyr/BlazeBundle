@@ -88,8 +88,8 @@ Usage
 {# foo is a Foo object #}
 <a href="{{ foo|blaze('show') }}">Show Foo</a>
 
-{# bax is a Baz object #}
-<a href="{{ foo|blaze('anything') }}">Show Baz</a>
+{# baz is a Baz object #}
+<a href="{{ baz|blaze('anything') }}">Show Baz</a>
 
 {# and the multiple objects .. #}
 <a href="{{ [foobar,baz,bazbar]|blaze('manage') }}">Show Baz</a>
