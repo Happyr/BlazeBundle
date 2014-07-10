@@ -3,12 +3,12 @@
     "type": "symfony-bundle",
     "description": "Write down your routing mapping at one place",
     "keywords": ["Routing"],
-    "homepage": "http://developer.happyr.se/symfony2-bundles/happyr-blaze-bundle",
+    "homepage": "http://developer.happyr.com/symfony2-bundles/happyr-blaze-bundle",
     "license": "MIT",
     "authors": [
         {
             "name": "Tobias Nyholm",
-            "email": "tobias@happyrecruiting.se"
+            "email": "tobias@happyr.com"
         }
     ],
     "require": {
