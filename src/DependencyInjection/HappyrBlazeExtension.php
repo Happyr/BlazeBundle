@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class aHappyrBlazeExtension extends Extension
+class HappyrBlazeExtension extends Extension
 {
     /**
      * {@inheritdoc}
