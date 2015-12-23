@@ -15,34 +15,18 @@
 
     <formatter type="clover" usefile="false"/>
     <testsuites>
-        <testsuite name="HappyR Mailer Test Suite">
-            <directory>./Tests</directory>
+        <testsuite name="Test Suite">
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
 
-    <listeners>
-        <listener class="\Mockery\Adapter\Phpunit\TestListener"
-                  file="vendor/mockery/mockery/library/Mockery/Adapter/Phpunit/TestListener.php">
-        </listener>
-    </listeners>
-
     <filter>
-        <blacklist>
-            <directory>./vendor/</directory>
-            <directory>./Tests/</directory>
-            <directory>./DataFixtures/</directory>
-            <directory>./Resources/</directory>
-            <directory>./DependencyInjection/</directory>
-
-            <!-- Don't test interfaces -->
-            <directory suffix="Interface.php">./</directory>
-        </blacklist>
+        <whitelist>
+            <directory suffix=".php">./</directory>
+            <exclude>
+                <directory>vendor</directory>
+                <directory>tests</directory>
+            </exclude>
+        </whitelist>
     </filter>
-
-    <logging>
-        <log type="coverage-clover" target="build/logs/phpunit.coverage.xml"/>
-        <log type="junit" target="build/logs/phpunit.xml" logIncompleteSkipped="false"/>
-    </logging>
-
-
 </phpunit>

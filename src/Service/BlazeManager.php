@@ -1,38 +1,29 @@
 <?php
 
+namespace Happyr\BlazeBundle\Service;
 
-namespace HappyR\BlazeBundle\Services;
-
-use HappyR\BlazeBundle\Exception\BlazeException;
-use HappyR\BlazeBundle\Model\ConfigurationInterface;
-use Symfony\Component\Debug\Exception\FatalErrorException;
+use Happyr\BlazeBundle\Exception\BlazeException;
+use Happyr\BlazeBundle\Model\ConfigurationInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
- * Class BlazeService
- *
- * @author Tobias Nyholm
- *
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class BlazeService implements BlazeServiceInterface
+class BlazeManager implements BlazeManagerInterface
 {
     /**
      * @var RouterInterface router
-     *
-     *
      */
     protected $router;
 
     /**
-     * @var \HappyR\BlazeBundle\Model\ConfigurationInterface config
-     *
-     *
+     * @var \Happyr\BlazeBundle\Model\ConfigurationInterface config
      */
     protected $config;
 
     /**
      * @param ConfigurationInterface $config
-     * @param RouterInterface $router
+     * @param RouterInterface        $router
      */
     public function __construct(ConfigurationInterface $config, RouterInterface $router)
     {
@@ -43,13 +34,14 @@ class BlazeService implements BlazeServiceInterface
     /**
      * Get the route and the params.
      *
-     * @param object &$object
+     * @param object $object
      * @param string $action
      *
      * @return array array($route, $params, $cmpObj)
-     * @throws \Exception
+     *
+     * @throws BlazeException
      */
-    protected function getRoute(&$object, $action)
+    protected function getRoute($object, $action)
     {
         if ($object == null) {
             throw new BlazeException(sprintf('Blaze: Cant find route for non-object.'));
@@ -71,30 +63,17 @@ class BlazeService implements BlazeServiceInterface
     }
 
     /**
-     * Alias for getPath with $absolute=true
-     *
-     * @param object &$object
-     * @param string $action
-     * @param array $cmpObj
-     *
-     * @return string url
+     * {@inheritdoc}
      */
-    public function getUrl(&$object, $action, array $cmpObj = array())
+    public function getUrl($object, $action, array $cmpObj = array())
     {
         return $this->getPath($object, $action, $cmpObj, true);
     }
 
     /**
-     * Get the path
-     *
-     * @param object &$object
-     * @param string $action
-     * @param array $cmpObj complementary objects that might be needed to generate the route
-     * @param bool $absolute if true we return the url
-     *
-     * @return string url
+     * {@inheritdoc}
      */
-    public function getPath(&$object, $action, array $cmpObj = array(), $absolute = false)
+    public function getPath($object, $action, array $cmpObj = array(), $absolute = false)
     {
         list($route, $params, $confCmpObj) = $this->getRoute($object, $action);
 
@@ -124,15 +103,15 @@ class BlazeService implements BlazeServiceInterface
     }
 
     /**
-     * Get the parameters to send to the @router
+     * Get the parameters to send to the @router.
      *
-     * @param object &$object
-     * @param array &$params
-     * @param array &$cmpObj
+     * @param object $object
+     * @param array  $params
+     * @param array  $cmpObj
      *
      * @return array
      */
-    protected function getRouteParams(&$object, array &$params, array &$cmpObj = array())
+    protected function getRouteParams($object, array $params, array $cmpObj = array())
     {
         /*
          * Assert: I know for sure that $object is not null
@@ -143,14 +122,14 @@ class BlazeService implements BlazeServiceInterface
             if (is_array($func)) {
                 /**
                  * the first element should use the $object
-                 * other elements should use objects in the $cmpObj
+                 * other elements should use objects in the $cmpObj.
                  */
                 if ($key == 0) {
                     //make sure that the size of $params is equal to $cmpObj + the $obejct
                     if (count($params) != count($cmpObj) + 1) {
                         throw new BlazeException(sprintf(
-                            'There is a mismatch in the number of route params and the number of objects. This is ' .
-                            'usually cased by a configuration error or that you forgotten to send the complementary' .
+                            'There is a mismatch in the number of route params and the number of objects. This is '.
+                            'usually cased by a configuration error or that you forgotten to send the complementary'.
                             ' objects to the Blaze service. We found %s parameter arrays but %d objects',
                             count($params),
                             count($cmpObj) + 1
@@ -177,15 +156,16 @@ class BlazeService implements BlazeServiceInterface
     }
 
     /**
-     * Get a route param
+     * Get a route param.
      *
-     * @param object &$object
-     * @param string &$function
+     * @param object $object
+     * @param string $function
      *
      * @return mixed
-     * @throws \HappyR\BlazeBundle\Exception\BlazeException
+     *
+     * @throws BlazeException
      */
-    protected function getSingleRouteParam(&$object, &$function)
+    protected function getSingleRouteParam($object, $function)
     {
         //if there is a chain of functions
         if (strstr($function, '.')) {
@@ -210,14 +190,14 @@ class BlazeService implements BlazeServiceInterface
     }
 
     /**
-     * Call a $function on the object
+     * Call a $function on the object.
      *
-     * @param object &$object
+     * @param object $object
      * @param string $function
      *
      * @return mixed
      */
-    private function callObjectFunction(&$object, $function)
+    private function callObjectFunction($object, $function)
     {
         try {
             return $object->$function();
@@ -236,13 +216,13 @@ class BlazeService implements BlazeServiceInterface
 
     /**
      * Get the class in the config.
-     * If the class of $object is not found, try the parent of $object
+     * If the class of $object is not found, try the parent of $object.
      *
-     * @param object &$object
+     * @param object $object
      *
      * @return string
      */
-    protected function getClass(&$object)
+    protected function getClass($object)
     {
         if (!is_object($object)) {
             //we assume that $object is a string and namespace
@@ -260,7 +240,7 @@ class BlazeService implements BlazeServiceInterface
         $class = get_class($object);
 
         //Do max 3 times
-        for ($i = 0; $i < 3 && $class; $i++) {
+        for ($i = 0; $i < 3 && $class; ++$i) {
             if ($this->config->classExist($class)) {
                 return $class;
             }

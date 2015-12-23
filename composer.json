@@ -13,17 +13,20 @@
     ],
     "require": {
         "php": ">=5.3.2",
-        "symfony/symfony": ">=2.0",
-        "twig/twig": "*"
+        "symfony/symfony": "~2.3|~3.0",
+        "twig/twig": "~1.12"
     },
     "require-dev": {
-        "mockery/mockery": "*"
+        "matthiasnoback/symfony-config-test": "^1.4"
     },
     "autoload": {
-        "psr-0": {
-            "HappyR\\BlazeBundle": ""
+        "psr-4": {
+            "Happyr\\BlazeBundle\\": "src/"
         }
     },
-    "target-dir": "HappyR/BlazeBundle"
-
+    "autoload-dev": {
+        "psr-4": {
+            "tests\\Happyr\\BlazeBundle\\": "tests/"
+        }
+    }
 }
