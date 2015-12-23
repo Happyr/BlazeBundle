@@ -1,23 +1,22 @@
 <?php
 
-namespace HappyR\BlazeBundle\DependencyInjection;
+namespace Happyr\BlazeBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This is the class that validates and merges configuration from your app/config files
- *
+ * This is the class that validates and merges configuration from your app/config files.
  */
 class Configuration implements ConfigurationInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('happy_r_blaze')
+        $treeBuilder->root('happyr_blaze')
 
             ->children()
             ->arrayNode('objects')
@@ -38,7 +37,7 @@ class Configuration implements ConfigurationInterface
                     return false;
                 }
             )
-            ->thenInvalid('The happy_r_blaze.objects config %s must be an array.')
+            ->thenInvalid('The happyr_blaze.objects config %s must be an array.')
             ->end()
 
             //make sure route and parameters is set

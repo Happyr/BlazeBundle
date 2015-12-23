@@ -1,23 +1,18 @@
 <?php
 
+namespace Happyr\BlazeBundle\Twig;
 
-namespace HappyR\BlazeBundle\Twig;
-
-use HappyR\BlazeBundle\Services\BlazeServiceInterface;
+use Happyr\BlazeBundle\Service\BlazeServiceInterface;
 
 /**
- * Class BlazeExtension
+ * Class BlazeExtension.
  *
  * @author Tobias Nyholm
- *
  */
 class BlazeExtension extends \Twig_Extension
 {
-
     /**
      * @var BlazeServiceInterface blaze
-     *
-     *
      */
     protected $blaze;
 
@@ -54,11 +49,11 @@ class BlazeExtension extends \Twig_Extension
     }
 
     /**
-     * Call the blaze service
+     * Call the blaze service.
      *
-     * @param mixed $object
+     * @param mixed  $object
      * @param string $action
-     * @param boolean $absolute
+     * @param bool   $absolute
      *
      * @return string
      */

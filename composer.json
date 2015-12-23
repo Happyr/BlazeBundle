@@ -21,9 +21,9 @@
     },
     "autoload": {
         "psr-0": {
-            "HappyR\\BlazeBundle": ""
+            "Happyr\\BlazeBundle": ""
         }
     },
-    "target-dir": "HappyR/BlazeBundle"
+    "target-dir": "Happyr/BlazeBundle"
 
 }

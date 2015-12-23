@@ -1,4 +1,4 @@
-# HappyR BlazeBundle
+# Happyr BlazeBundle
 
 To easy manage and update your routes.
 
@@ -37,7 +37,7 @@ $ php composer.phar update
 // in AppKernel::registerBundles()
 $bundles = array(
     // ...
-    new HappyR\BlazeBundle\HappyRBlazeBundle(),
+    new Happyr\BlazeBundle\HappyrBlazeBundle(),
     // ...
 );
 ```
@@ -47,7 +47,7 @@ $bundles = array(
 ``` yaml
 # app/config/config.yml
 
-happy_r_blaze:
+happyr_blaze:
   objects:
     Acme\DemoBundle\Entity\Foo:
       edit:
@@ -103,7 +103,7 @@ Usage
 
 // ...
   public function SomeAction(){
-    $blaze=$this->get('happy_r_blaze.blaze_service');
+    $blaze=$this->get('happyr_blaze.blaze_service');
 
     $showUrl = $blaze->getPath($foo, 'show');
     $manageUrl = $blaze->getPath($foobar, 'show', array($baz,$bazbar));

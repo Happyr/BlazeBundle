@@ -1,13 +1,11 @@
 <?php
 
-
-namespace HappyR\BlazeBundle\Exception;
+namespace Happyr\BlazeBundle\Exception;
 
 /**
- * Class BlazeException
+ * Class BlazeException.
  *
  * @author Tobias Nyholm
- *
  */
 class BlazeException extends \Exception
 {

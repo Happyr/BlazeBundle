@@ -1,13 +1,11 @@
 <?php
 
-
-namespace HappyR\BlazeBundle\Model;
+namespace Happyr\BlazeBundle\Model;
 
 /**
- * Class ConfigurationInterface
+ * Class ConfigurationInterface.
  *
  * @author Tobias Nyholm
- *
  */
 interface ConfigurationInterface
 {
@@ -31,7 +29,7 @@ interface ConfigurationInterface
     public function actionExist($class, $action);
 
     /**
-     * Get the actions for a specific class
+     * Get the actions for a specific class.
      *
      * @param string $class
      *
@@ -40,7 +38,7 @@ interface ConfigurationInterface
     public function getActions($class);
 
     /**
-     * Get the route for a class and action
+     * Get the route for a class and action.
      *
      * @param string $class
      * @param string $action
@@ -50,7 +48,7 @@ interface ConfigurationInterface
     public function getRoute($class, $action);
 
     /**
-     * Get the parameters for the route
+     * Get the parameters for the route.
      *
      * @param string $class
      * @param string $action
@@ -60,7 +58,7 @@ interface ConfigurationInterface
     public function getParameters($class, $action);
 
     /**
-     * Get the complementary objects
+     * Get the complementary objects.
      *
      * @param string $class
      * @param string $action
