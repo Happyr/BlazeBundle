@@ -3,9 +3,7 @@
 namespace Happyr\BlazeBundle\Model;
 
 /**
- * Class ConfigurationInterface.
- *
- * @author Tobias Nyholm
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 interface ConfigurationInterface
 {
@@ -24,7 +22,7 @@ interface ConfigurationInterface
      * @param string $class
      * @param string $action
      *
-     * @return mixed
+     * @return bool
      */
     public function actionExist($class, $action);
 

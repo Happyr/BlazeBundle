@@ -2,24 +2,22 @@
 
 namespace Happyr\BlazeBundle\Twig;
 
-use Happyr\BlazeBundle\Service\BlazeServiceInterface;
+use Happyr\BlazeBundle\Service\BlazeManagerInterface;
 
 /**
- * Class BlazeExtension.
- *
- * @author Tobias Nyholm
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 class BlazeExtension extends \Twig_Extension
 {
     /**
-     * @var BlazeServiceInterface blaze
+     * @var BlazeManagerInterface blaze
      */
     protected $blaze;
 
     /**
-     * @param BlazeServiceInterface $blaze
+     * @param BlazeManagerInterface $blaze
      */
-    public function __construct(BlazeServiceInterface $blaze)
+    public function __construct(BlazeManagerInterface $blaze)
     {
         $this->blaze = $blaze;
     }

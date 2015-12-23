@@ -5,7 +5,7 @@ namespace Happyr\BlazeBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class HappyrBlazeBundle.
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 class HappyrBlazeBundle extends Bundle
 {

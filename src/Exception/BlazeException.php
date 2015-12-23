@@ -3,9 +3,7 @@
 namespace Happyr\BlazeBundle\Exception;
 
 /**
- * Class BlazeException.
- *
- * @author Tobias Nyholm
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 class BlazeException extends \Exception
 {

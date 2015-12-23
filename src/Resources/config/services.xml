@@ -9,7 +9,7 @@
         <argument>%happyr_blaze.objects%</argument>
     </service>
 
-    <service id="happyr_blaze.blaze_service" class="Happyr\BlazeBundle\Service\BlazeService">
+    <service id="happyr_blaze.blaze_service" class="Happyr\BlazeBundle\Service\BlazeManager">
         <argument type="service" id="happyr_blaze.config"/>
         <argument type="service" id="router"/>
     </service>

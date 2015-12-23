@@ -7,11 +7,9 @@ use Happyr\BlazeBundle\Model\ConfigurationInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
- * Class BlazeService.
- *
- * @author Tobias Nyholm
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class BlazeService implements BlazeServiceInterface
+class BlazeManager implements BlazeManagerInterface
 {
     /**
      * @var RouterInterface router
@@ -65,13 +63,7 @@ class BlazeService implements BlazeServiceInterface
     }
 
     /**
-     * Alias for getPath with $absolute=true.
-     *
-     * @param object &$object
-     * @param string $action
-     * @param array  $cmpObj
-     *
-     * @return string url
+     * {@inheritdoc}
      */
     public function getUrl($object, $action, array $cmpObj = array())
     {
@@ -79,16 +71,9 @@ class BlazeService implements BlazeServiceInterface
     }
 
     /**
-     * Get the path.
-     *
-     * @param object &$object
-     * @param string $action
-     * @param array  $cmpObj   complementary objects that might be needed to generate the route
-     * @param bool   $absolute if true we return the url
-     *
-     * @return string url
+     * {@inheritdoc}
      */
-    public function getPath(&$object, $action, array $cmpObj = array(), $absolute = false)
+    public function getPath($object, $action, array $cmpObj = array(), $absolute = false)
     {
         list($route, $params, $confCmpObj) = $this->getRoute($object, $action);
 

@@ -3,9 +3,7 @@
 namespace Happyr\BlazeBundle\Model;
 
 /**
- * Class Configuration.
- *
- * @author Tobias Nyholm
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -25,10 +23,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Get all classes in the config file.
-     *
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getClasses()
     {
@@ -36,11 +31,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Get the actions for a specific class.
-     *
-     * @param string $class
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getActions($class)
     {
@@ -48,12 +39,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Get the route for a class and action.
-     *
-     * @param string $class
-     * @param string $action
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getRoute($class, $action)
     {
@@ -61,12 +47,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Get the parameters for the route.
-     *
-     * @param string $class
-     * @param string $action
-     *
-     * @return array where key=>value is routeParam=>function
+     * {@inheritdoc}
      */
     public function getParameters($class, $action)
     {
@@ -74,12 +55,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Get the complementary objects if they exists for the route.
-     *
-     * @param string $class
-     * @param string $action
-     *
-     * @return array of objects
+     * {@inheritdoc}
      */
     public function getComplementaryObjects($class, $action)
     {
@@ -91,12 +67,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Does this action exists for that class?
-     *
-     * @param string $class
-     * @param string $action
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function actionExist($class, $action)
     {
@@ -104,11 +75,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Does this class exist?
-     *
-     * @param string $class
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function classExist($class)
     {
