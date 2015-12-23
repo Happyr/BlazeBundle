@@ -34,12 +34,12 @@ class BlazeManager implements BlazeManagerInterface
     /**
      * Get the route and the params.
      *
-     * @param object &$object
+     * @param object $object
      * @param string $action
      *
      * @return array array($route, $params, $cmpObj)
      *
-     * @throws \Exception
+     * @throws BlazeException
      */
     protected function getRoute($object, $action)
     {
@@ -105,13 +105,13 @@ class BlazeManager implements BlazeManagerInterface
     /**
      * Get the parameters to send to the @router.
      *
-     * @param object &$object
-     * @param array  &$params
-     * @param array  &$cmpObj
+     * @param object $object
+     * @param array  $params
+     * @param array  $cmpObj
      *
      * @return array
      */
-    protected function getRouteParams(&$object, array &$params, array &$cmpObj = array())
+    protected function getRouteParams($object, array $params, array $cmpObj = array())
     {
         /*
          * Assert: I know for sure that $object is not null
@@ -158,14 +158,14 @@ class BlazeManager implements BlazeManagerInterface
     /**
      * Get a route param.
      *
-     * @param object &$object
-     * @param string &$function
+     * @param object $object
+     * @param string $function
      *
      * @return mixed
      *
-     * @throws \Happyr\BlazeBundle\Exception\BlazeException
+     * @throws BlazeException
      */
-    protected function getSingleRouteParam(&$object, &$function)
+    protected function getSingleRouteParam($object, $function)
     {
         //if there is a chain of functions
         if (strstr($function, '.')) {
@@ -192,12 +192,12 @@ class BlazeManager implements BlazeManagerInterface
     /**
      * Call a $function on the object.
      *
-     * @param object &$object
+     * @param object $object
      * @param string $function
      *
      * @return mixed
      */
-    private function callObjectFunction(&$object, $function)
+    private function callObjectFunction($object, $function)
     {
         try {
             return $object->$function();
@@ -218,11 +218,11 @@ class BlazeManager implements BlazeManagerInterface
      * Get the class in the config.
      * If the class of $object is not found, try the parent of $object.
      *
-     * @param object &$object
+     * @param object $object
      *
      * @return string
      */
-    protected function getClass(&$object)
+    protected function getClass($object)
     {
         if (!is_object($object)) {
             //we assume that $object is a string and namespace
