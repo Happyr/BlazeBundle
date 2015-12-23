@@ -2,7 +2,7 @@
     "name": "happyr/blaze-bundle",
     "type": "symfony-bundle",
     "description": "Write down your routing mapping at one place",
-    "keywords": ["Routing"],
+    "keywords": ["routing", "blaze", "dynamic", "route"],
     "homepage": "http://developer.happyr.com/symfony2-bundles/happyr-blaze-bundle",
     "license": "MIT",
     "authors": [

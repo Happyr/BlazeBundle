@@ -1,30 +1,19 @@
 # Happyr BlazeBundle
 
-To easy manage and update your routes.
+This bundle lets you configure dynamic routes. A piece of code explains the benefit: 
+ 
+```html
+// Generate the path /blog-post/{post_id}/comment/{comment_id}/edit
+<a href="{{ path('edit_comment', {'comment_id':comment.id, 'post_id':comment.post.id}) }}">Click here</a>
+<a href="{{ comment|blaze('edit') }}">Click here</a>
+```
 
-Installation
-------------
+## Installation
 
 ### Step 1: Using Composer
 
-Install it with Composer!
-
-```js
-// composer.json
-{
-    // ...
-    require: {
-        // ...
-        "happyr/blaze-bundle": "dev-master",
-    }
-}
-```
-
-Then, you can install the new dependencies by running Composer's ``update``
-command from the directory where your ``composer.json`` file is located:
-
 ```bash
-$ php composer.phar update
+$ composer require happyr/blaze-bundle
 ```
 
 ### Step 2: Register the bundle
@@ -32,8 +21,6 @@ $ php composer.phar update
  To register the bundles with your kernel:
 
 ```php
-<?php
-
 // in AppKernel::registerBundles()
 $bundles = array(
     // ...
@@ -77,14 +64,10 @@ happyr_blaze:
 
 
 
-Usage
------
+## Usage
 
 ### Twig
-``` html
-
-// Any.html.twig
-
+```html
 {# foo is a Foo object #}
 <a href="{{ foo|blaze('show') }}">Show Foo</a>
 
@@ -93,22 +76,19 @@ Usage
 
 {# and the multiple objects .. #}
 <a href="{{ [foobar,baz,bazbar]|blaze('manage') }}">Show Baz</a>
-
 ```
 
 ### PHP
 
 ``` php
 //AnyController.php
-
 // ...
-  public function SomeAction(){
+  public function SomeAction() {
     $blaze=$this->get('happyr.blaze');
 
     $showUrl = $blaze->getPath($foo, 'show');
-    $manageUrl = $blaze->getPath($foobar, 'show', array($baz,$bazbar));
+    $manageUrl = $blaze->getPath($foobar, 'show', array($baz, $bazbar));
 
     // ...
   }
-
 ```
