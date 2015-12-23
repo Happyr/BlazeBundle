@@ -103,7 +103,7 @@ Usage
 
 // ...
   public function SomeAction(){
-    $blaze=$this->get('happyr_blaze.blaze_service');
+    $blaze=$this->get('happyr.blaze');
 
     $showUrl = $blaze->getPath($foo, 'show');
     $manageUrl = $blaze->getPath($foobar, 'show', array($baz,$bazbar));
