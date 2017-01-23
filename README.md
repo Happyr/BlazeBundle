@@ -1,7 +1,7 @@
 # Happyr BlazeBundle
 
 [![Latest Version](https://img.shields.io/github/release/Happyr/BlazeBundle.svg?style=flat-square)](https://github.com/Happyr/BlazeBundle/releases)
-[![Build Status](https://img.shields.io/travis/Happyr/BlazeBundle.svg?style=flat-square)](https://travis-ci.org/Happyr/BlazeBundle)
+[![Build Status](https://img.shields.io/travis/Happyr/BlazeBundle/master.svg?style=flat-square)](https://travis-ci.org/Happyr/BlazeBundle)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/Happyr/BlazeBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/Happyr/BlazeBundle)
 [![Quality Score](https://img.shields.io/scrutinizer/g/Happyr/BlazeBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/Happyr/BlazeBundle)
 [![Total Downloads](https://img.shields.io/packagist/dt/happyr/blaze-bundle.svg?style=flat-square)](https://packagist.org/packages/happyr/blaze-bundle)
