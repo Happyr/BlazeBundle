@@ -4,6 +4,7 @@ namespace Happyr\BlazeBundle\Service;
 
 use Happyr\BlazeBundle\Exception\BlazeException;
 use Happyr\BlazeBundle\Model\ConfigurationInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -99,7 +100,12 @@ class BlazeManager implements BlazeManagerInterface
 
         $routeParams = $this->getRouteParams($object, $params, $cmpObj);
 
-        return $this->router->generate($route, $routeParams, $absolute);
+        $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH;
+        if ($absolute) {
+            $referenceType = UrlGeneratorInterface::ABSOLUTE_URL;
+        }
+
+        return $this->router->generate($route, $routeParams, $referenceType);
     }
 
     /**
