@@ -44,7 +44,7 @@ class BlazeManager implements BlazeManagerInterface
      */
     protected function getRoute($object, $action)
     {
-        if ($object == null) {
+        if (null == $object) {
             throw new BlazeException(sprintf('Blaze: Cant find route for non-object.'));
         }
 
@@ -60,13 +60,13 @@ class BlazeManager implements BlazeManagerInterface
         $params = $this->config->getParameters($class, $action);
         $cmpObj = $this->config->getComplementaryObjects($class, $action);
 
-        return array($route, $params, $cmpObj);
+        return [$route, $params, $cmpObj];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getUrl($object, $action, array $cmpObj = array())
+    public function getUrl($object, $action, array $cmpObj = [])
     {
         return $this->getPath($object, $action, $cmpObj, true);
     }
@@ -74,7 +74,7 @@ class BlazeManager implements BlazeManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getPath($object, $action, array $cmpObj = array(), $absolute = false)
+    public function getPath($object, $action, array $cmpObj = [], $absolute = false)
     {
         list($route, $params, $confCmpObj) = $this->getRoute($object, $action);
 
@@ -117,20 +117,20 @@ class BlazeManager implements BlazeManagerInterface
      *
      * @return array
      */
-    protected function getRouteParams($object, array $params, array $cmpObj = array())
+    protected function getRouteParams($object, array $params, array $cmpObj = [])
     {
         /*
          * Assert: I know for sure that $object is not null
          */
-        $routeParams = array();
+        $routeParams = [];
         foreach ($params as $key => $func) {
             //if there is complementary objects
             if (is_array($func)) {
-                /**
+                /*
                  * the first element should use the $object
                  * other elements should use objects in the $cmpObj.
                  */
-                if ($key == 0) {
+                if (0 == $key) {
                     //make sure that the size of $params is equal to $cmpObj + the $obejct
                     if (count($params) != count($cmpObj) + 1) {
                         throw new BlazeException(sprintf(
@@ -143,6 +143,7 @@ class BlazeManager implements BlazeManagerInterface
                     }
 
                     $routeParams = array_merge($routeParams, $this->getRouteParams($object, $func));
+
                     continue;
                 } else {
                     /*
@@ -151,6 +152,7 @@ class BlazeManager implements BlazeManagerInterface
 
                     //get the route params with the complementary object
                     $routeParams = array_merge($routeParams, $this->getRouteParams($cmpObj[$key - 1], $func));
+
                     continue;
                 }
             }
@@ -180,7 +182,7 @@ class BlazeManager implements BlazeManagerInterface
             foreach ($funcs as $f) {
                 $returnValue = $this->callObjectFunction($returnValue, $f);
 
-                if ($returnValue === null) {
+                if (null === $returnValue) {
                     throw new BlazeException(sprintf(
                         'Function "%s" ended up with returning non-object (null) after "%s".',
                         $function,
@@ -208,7 +210,7 @@ class BlazeManager implements BlazeManagerInterface
         try {
             return $object->$function();
         } catch (\Exception $e) {
-            if ($object === null) {
+            if (null === $object) {
                 throw new BlazeException(sprintf('Called "%s" on a non-object', $function));
             }
 

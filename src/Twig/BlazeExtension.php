@@ -29,9 +29,9 @@ class BlazeExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return array(
-            new \Twig_SimpleFilter('blaze', array($this, 'blaze')),
-        );
+        return [
+            new \Twig_SimpleFilter('blaze', [$this, 'blaze']),
+        ];
     }
 
     /**
@@ -41,9 +41,9 @@ class BlazeExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
-            new \Twig_SimpleFunction('blaze', array($this, 'blaze')),
-        );
+        return [
+            new \Twig_SimpleFunction('blaze', [$this, 'blaze']),
+        ];
     }
 
     /**
@@ -57,7 +57,7 @@ class BlazeExtension extends \Twig_Extension
      */
     public function blaze($object, $action, $absolute = false)
     {
-        $compObjects = array();
+        $compObjects = [];
 
         if (is_array($object)) {
             $compObjects = $object;

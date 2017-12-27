@@ -60,7 +60,7 @@ class Configuration implements ConfigurationInterface
     public function getComplementaryObjects($class, $action)
     {
         if (!isset($this->config[$class][$action]['complementaryObjects'])) {
-            return array();
+            return [];
         }
 
         return $this->config[$class][$action]['complementaryObjects'];

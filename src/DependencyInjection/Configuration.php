@@ -23,7 +23,7 @@ class Configuration implements ConfigurationInterface
                 ->requiresAtLeastOneElement()
                 ->useAttributeAsKey('name')
                 ->prototype('variable')
-                ->treatNullLike(array())
+                ->treatNullLike([])
 
                 //make sure that there is some config after each object
                 ->validate()

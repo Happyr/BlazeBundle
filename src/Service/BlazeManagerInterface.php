@@ -16,7 +16,7 @@ interface BlazeManagerInterface
      *
      * @return string url
      */
-    public function getUrl($object, $action, array $cmpObj = array());
+    public function getUrl($object, $action, array $cmpObj = []);
 
     /**
      * Get the path.
@@ -28,5 +28,5 @@ interface BlazeManagerInterface
      *
      * @return string url
      */
-    public function getPath($object, $action, array $cmpObj = array(), $absolute = false);
+    public function getPath($object, $action, array $cmpObj = [], $absolute = false);
 }

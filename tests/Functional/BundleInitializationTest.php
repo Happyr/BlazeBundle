@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\Happyr\BlazeBundle\Functional;
 
 use Happyr\BlazeBundle\HappyrBlazeBundle;
@@ -31,5 +32,4 @@ class BundleInitializationTest extends BaseBundleTestCase
         $service = $container->get('test.happyr.blaze');
         $this->assertInstanceOf(BlazeManagerInterface::class, $service);
     }
-
 }
