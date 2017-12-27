@@ -4,8 +4,9 @@ namespace tests\Happyr\BlazeBundle\DependencyInjection;
 
 use Happyr\BlazeBundle\DependencyInjection\Configuration;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
 
-class ConfigurationTest  extends \PHPUnit_Framework_TestCase
+class ConfigurationTest  extends TestCase
 {
     use ConfigurationTestCaseTrait;
 

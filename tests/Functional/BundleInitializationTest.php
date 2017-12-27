@@ -14,6 +14,12 @@ class BundleInitializationTest extends BaseBundleTestCase
 
     public function testInitBundle()
     {
+        // Create a new Kernel
+        $kernel = $this->createKernel();
+
+        // Add some configuration
+        $kernel->addConfigFile(__DIR__.'/Resources/services.yml');
+
         // Boot the kernel.
         $this->bootKernel();
 
@@ -21,8 +27,8 @@ class BundleInitializationTest extends BaseBundleTestCase
         $container = $this->getContainer();
 
         // Test if you services exists
-        $this->assertTrue($container->has('happyr.blaze'));
-        $service = $container->get('happyr.blaze');
+        $this->assertTrue($container->has('test.happyr.blaze'));
+        $service = $container->get('test.happyr.blaze');
         $this->assertInstanceOf(BlazeManagerInterface::class, $service);
     }
 
