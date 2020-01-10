@@ -51,9 +51,7 @@ class BlazeManager implements BlazeManagerInterface
         $class = $this->getClass($object);
 
         if (!$this->config->actionExist($class, $action)) {
-            throw new BlazeException(
-                sprintf('Action "%s" for class %s does not exist in Blaze config.', $action, $class)
-            );
+            throw new BlazeException(sprintf('Action "%s" for class %s does not exist in Blaze config.', $action, $class));
         }
 
         $route = $this->config->getRoute($class, $action);
@@ -81,20 +79,11 @@ class BlazeManager implements BlazeManagerInterface
         // make sure that $confCmpObj and $cmpObj is matching
         foreach ($confCmpObj as $key => $class) {
             if (!isset($cmpObj[$key])) {
-                throw new BlazeException(sprintf(
-                    'The %d parameter of complementary objects was expected to be %s but you gave me nothing!',
-                    $key,
-                    $class
-                ));
+                throw new BlazeException(sprintf('The %d parameter of complementary objects was expected to be %s but you gave me nothing!', $key, $class));
             }
 
             if ($this->getClass($cmpObj[$key]) != $class) {
-                throw new BlazeException(sprintf(
-                    'The %d parameter of complementary objects was expected to be %s but instance of %s was given',
-                    $key,
-                    $class,
-                    get_class($cmpObj[$key])
-                ));
+                throw new BlazeException(sprintf('The %d parameter of complementary objects was expected to be %s but instance of %s was given', $key, $class, get_class($cmpObj[$key])));
             }
         }
 
@@ -133,13 +122,7 @@ class BlazeManager implements BlazeManagerInterface
                 if (0 == $key) {
                     //make sure that the size of $params is equal to $cmpObj + the $obejct
                     if (count($params) != count($cmpObj) + 1) {
-                        throw new BlazeException(sprintf(
-                            'There is a mismatch in the number of route params and the number of objects. This is '.
-                            'usually cased by a configuration error or that you forgotten to send the complementary'.
-                            ' objects to the Blaze service. We found %s parameter arrays but %d objects',
-                            count($params),
-                            count($cmpObj) + 1
-                        ));
+                        throw new BlazeException(sprintf('There is a mismatch in the number of route params and the number of objects. This is '.'usually cased by a configuration error or that you forgotten to send the complementary'.' objects to the Blaze service. We found %s parameter arrays but %d objects', count($params), count($cmpObj) + 1));
                     }
 
                     $routeParams = array_merge($routeParams, $this->getRouteParams($object, $func));
@@ -183,11 +166,7 @@ class BlazeManager implements BlazeManagerInterface
                 $returnValue = $this->callObjectFunction($returnValue, $f);
 
                 if (null === $returnValue) {
-                    throw new BlazeException(sprintf(
-                        'Function "%s" ended up with returning non-object (null) after "%s".',
-                        $function,
-                        $f
-                    ));
+                    throw new BlazeException(sprintf('Function "%s" ended up with returning non-object (null) after "%s".', $function, $f));
                 }
             }
 
@@ -215,9 +194,7 @@ class BlazeManager implements BlazeManagerInterface
             }
 
             if (!method_exists($object, $function)) {
-                throw new BlazeException(
-                    sprintf('Method %s does not exits on object %s', $function, get_class($object))
-                );
+                throw new BlazeException(sprintf('Method %s does not exits on object %s', $function, get_class($object)));
             }
         }
     }
@@ -239,10 +216,7 @@ class BlazeManager implements BlazeManagerInterface
             }
 
             //class not loaded
-            throw new BlazeException(sprintf(
-                'Blaze must receive an object or a fully qualified name of a loaded class. We got "%s"',
-                $object
-            ));
+            throw new BlazeException(sprintf('Blaze must receive an object or a fully qualified name of a loaded class. We got "%s"', $object));
         }
 
         $class = get_class($object);

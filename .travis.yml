@@ -21,20 +21,14 @@ matrix:
           # Test with lowest dependencies
         - php: 7.2
           env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_DEPRECATIONS_HELPER="weak"
-        - php: 7.0
-          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_DEPRECATIONS_HELPER="weak"
 
           # Test the latest stable release
-        - php: 7.0
-        - php: 7.1
         - php: 7.2
           env: COVERAGE=true TEST_COMMAND="composer test-ci"
+        - php: 7.3
+        - php: 7.4
 
           # Force some major versions of Symfony
-        - php: 7.2
-          env: DEPENDENCIES="dunglas/symfony-lock:^2"
-        - php: 7.2
-          env: DEPENDENCIES="dunglas/symfony-lock:^3"
         - php: 7.2
           env: DEPENDENCIES="dunglas/symfony-lock:^4"
 
@@ -64,7 +58,3 @@ script:
 after_success:
     - if [[ $COVERAGE = true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
     - if [[ $COVERAGE = true ]]; then php ocular.phar code-coverage:upload --format=php-clover build/coverage.xml; fi
-
-after_script:
-    - wget http://tnyholm.se/reporter.phar
-    - php reporter.phar build:upload

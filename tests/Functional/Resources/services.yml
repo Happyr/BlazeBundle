@@ -1,4 +1,4 @@
 services:
   test.happyr.blaze:
     public: true
-    alias: happyr.blaze
+    alias: Happyr\BlazeBundle\Service\BlazeManager

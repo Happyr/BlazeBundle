@@ -9,14 +9,19 @@
         <argument>%happyr.blaze.objects%</argument>
     </service>
 
-    <service id="happyr.blaze" class="Happyr\BlazeBundle\Service\BlazeManager">
+    <service id="Happyr\BlazeBundle\Service\BlazeManagerInterface" alias="Happyr\BlazeBundle\Service\BlazeManager"/>
+    <service id="Happyr\BlazeBundle\Service\BlazeManager">
         <argument type="service" id="happyr.blaze.config"/>
         <argument type="service" id="router"/>
     </service>
 
     <service id="happyr.blaze.twig_extension" class="Happyr\BlazeBundle\Twig\BlazeExtension">
-        <argument type="service" id="happyr.blaze"/>
         <tag name="twig.extension"/>
+    </service>
+
+    <service id="happyr.blaze.twig_runtime" class="Happyr\BlazeBundle\Twig\BlazeRuntime">
+        <argument type="service" id="Happyr\BlazeBundle\Service\BlazeManager"/>
+        <tag name="twig.runtime"/>
     </service>
 </services>
 

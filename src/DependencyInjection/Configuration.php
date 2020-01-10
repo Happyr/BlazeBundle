@@ -17,8 +17,10 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('happyr_blaze')->children()
+        $treeBuilder = new TreeBuilder('happyr_blaze');
+        $rootNode = $treeBuilder->getRootNode();
+
+        $rootNode->children()
             ->arrayNode('objects')
                 ->requiresAtLeastOneElement()
                 ->useAttributeAsKey('name')

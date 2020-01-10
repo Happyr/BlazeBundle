@@ -6,8 +6,8 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/Happyr/BlazeBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/Happyr/BlazeBundle)
 [![Total Downloads](https://img.shields.io/packagist/dt/happyr/blaze-bundle.svg?style=flat-square)](https://packagist.org/packages/happyr/blaze-bundle)
 
-This bundle lets you configure dynamic routes. A piece of code explains the benefit: 
- 
+This bundle lets you configure dynamic routes. A piece of code explains the benefit:
+
 ```html
 // Generate the path /blog-post/{post_id}/comment/{comment_id}/edit
 <a href="{{ path('edit_comment', {'comment_id':comment.id, 'post_id':comment.post.id}) }}">Click here</a>
@@ -86,15 +86,23 @@ happyr_blaze:
 
 ### PHP
 
-``` php
-//AnyController.php
-// ...
-  public function SomeAction() {
-    $blaze=$this->get('happyr.blaze');
+```php
+use Happyr\BlazeBundle\Service\BlazeManagerInterface;
 
-    $showUrl = $blaze->getPath($foo, 'show');
-    $manageUrl = $blaze->getPath($foobar, 'show', array($baz, $bazbar));
+class MyController
+{
+    private $blaze;
+    public function __construct(BlazeManagerInterface $blaze) {
+        $this->blaze = $blaze;
+    }
 
-    // ...
-  }
+    public function SomeAction() {
+        $blaze = $this->get(BlazeManagerInterface::class);
+
+        $showUrl = $blaze->getPath($foo, 'show');
+        $manageUrl = $blaze->getPath($foobar, 'show', array($baz, $bazbar));
+
+        // ...
+    }
+}
 ```
